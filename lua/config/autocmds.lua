@@ -25,3 +25,15 @@ vim.api.nvim_create_autocmd({ "BufEnter", "BufWinEnter" }, {
   end,
   pattern = { "*.java" },
 })
+
+-- Command to compile and run dart programs
+vim.api.nvim_create_autocmd({ "BufEnter", "BufWinEnter" }, {
+  callback = function()
+    vim.api.nvim_create_user_command("Run", function()
+      vim.cmd("w")
+      vim.cmd("terminal dart %")
+      vim.cmd("startinsert")
+    end, { nargs = "?" })
+  end,
+  pattern = { "*.dart" },
+})
